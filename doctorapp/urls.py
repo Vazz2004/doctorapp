@@ -1,8 +1,7 @@
-
-from django.urls import path , include
-
+from django.urls import path, include
 
 urlpatterns = [
-    path('api/',include('patients.urls'))
+    path('api/patients/', include('patients.urls')),
+    path('api/doctors/', include('doctors.urls')),
+    path('api/bookings/', include('bookings.urls')),
 ]
-

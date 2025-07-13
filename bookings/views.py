@@ -1,3 +1,16 @@
-from django.shortcuts import render
+from .models import Appointment
+from .serializers import AppointmentSerializer
+from rest_framework.generics import  ListAPIView, CreateAPIView , RetrieveUpdateDestroyAPIView
 
-# Create your views here.
+
+class ListoBookings(ListAPIView,CreateAPIView):
+    allowed_method = ['GET', 'POST']
+    serializer_class= AppointmentSerializer
+    queryset = Appointment.objects.all()
+
+
+class DetailBookingsView(RetrieveUpdateDestroyAPIView):
+    allowed_methods = ['GET', 'PUT', 'DELETE']
+    serializer_class = AppointmentSerializer
+    queryset = Appointment.objects.all()
+

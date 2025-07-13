@@ -10,6 +10,9 @@ class Patient(models.Model):
     address = models.TextField()
     medical_history = models.TextField()
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class Insurance(models.Model):
     Patient = models.ForeignKey(
         Patient , related_name='insurances', on_delete=models.CASCADE

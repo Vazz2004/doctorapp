@@ -4,6 +4,9 @@ from rest_framework.generics import  ListAPIView, CreateAPIView , RetrieveUpdate
 
 
 class ListoBookings(ListAPIView,CreateAPIView):
+    '''
+    Obtiente la lista de de citas programadas 
+    '''
     allowed_method = ['GET', 'POST']
     serializer_class= AppointmentSerializer
     queryset = Appointment.objects.all()

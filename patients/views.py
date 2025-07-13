@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Patient
 from .serializers import PatientSerializer
+from rest_framework.views import APIView
 
-# GET (lista) y POST (crear)
+# Vista basada en función
 @api_view(['GET', 'POST'])
 def list_patients(request):
     if request.method == 'GET':
@@ -18,7 +19,21 @@ def list_patients(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# GET (detalle), PATCH (actualizar parcial), PUT (actualizar completo), DELETE
+class ListPatientsView(APIView):
+    allowed_method = ['GET', 'POST']
+
+    def get(self, request):
+        patients = Patient.objects.all()
+        serializer = PatientSerializer(patients, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PatientSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# Vista para detalle de paciente
 @api_view(['GET', 'PATCH', 'PUT', 'DELETE'])
 def detail_patient(request, pk):
     try:

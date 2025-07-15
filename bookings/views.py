@@ -2,7 +2,6 @@ from .models import Appointment
 from .serializers import AppointmentSerializer
 from rest_framework.generics import  ListAPIView, CreateAPIView , RetrieveUpdateDestroyAPIView
 
-
 class ListoBookings(ListAPIView,CreateAPIView):
     '''
     Obtiente la lista de de citas programadas 
